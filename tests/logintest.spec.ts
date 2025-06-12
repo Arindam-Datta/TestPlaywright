@@ -1,5 +1,6 @@
 import {test, expect} from '@playwright/test';
 import type { Locator } from '@playwright/test';
+import { Header} from '../Pages/Header'
 
 let usernameField: Locator;
 let passwordField: Locator;
@@ -11,6 +12,10 @@ test.beforeEach(async ({page}) => {
     usernameField = page.getByPlaceholder('Enter your username'); 
     passwordField = page.getByPlaceholder('Enter your password');
     loginButton = page.locator('button[type="submit"]');
+    const header = new Header(page);
+    await header.verifyHeader();
+    await header.verifyHomeLink();
+    await header.verifyAboutLink();
 });
 
 test('Page Loaded', async ({page}) => {
